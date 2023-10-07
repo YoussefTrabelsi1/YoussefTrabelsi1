@@ -1,0 +1,7 @@
+\babel@toc {nil}{}
+\contentsline {part}{I\hspace {1em}Partie}{2}%
+\contentsline {chapter}{\numberline {1}Chapitre}{3}%
+\contentsline {section}{\numberline {1.1}Section}{3}%
+\contentsline {part}{II\hspace {1em}Autre partie}{4}%
+\contentsline {chapter}{\numberline {2}Autre chapitre}{5}%
+\contentsline {section}{\numberline {2.1}Autre section}{5}%

@@ -1,0 +1,694 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+:root{
+    --header-height: 60px;
+}
+
+html{
+    background-color: rgb(245, 245, 255);
+}
+
+body{
+    margin : 0;
+    overflow-x: hidden;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover{
+    color: inherit;
+}
+
+main{
+    min-height: calc(100vh - 2 * var(--header-height));
+    position: relative;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Tout ce qui concerne les 2 headers */
+
+header, footer {
+    height: 60px;
+    margin: 0;
+    padding: 10px;
+    background : rgb(225, 225, 255); 
+    width : 100%;
+    box-sizing: border-box;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.connexion{
+    flex: 2;
+}
+
+.connexion, .connexion a{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.connexion a[type="button"], button, .btn{
+    transition: all 0.5s;
+    background-color: white;
+    padding: 4px;
+    border: solid 1px black;
+    margin-left: 10px;
+}
+
+.connexion a[type="button"]:hover, button:hover, .btn:hover{
+    background-color: wheat;
+}
+
+.civic-tn{
+    font-variant: small-caps;
+    font-weight: bold;
+    font-size: 2em;
+    flex: 2;
+}
+
+.local-admin{
+    font-variant: small-caps;
+    font-size: 2em;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+._imgaccount{
+    width: 40px;
+    height: 40px;
+}
+
+.Tri a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.Tri{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: rgb(233, 233, 255) ;
+    height: 40px;
+    width: calc(100% + 100px);
+    margin: -50px;
+    margin-bottom: 50px;
+}
+
+
+.Tri input {
+    pointer-events: none;
+    margin: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    margin-right: 4px;
+  }
+
+.Tri label, .Tri input{
+    cursor: pointer;
+}
+
+/* Grid et posts */
+
+.wrapper {
+    min-height: calc(100vh - 2 * var(--header-height) - 140px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 40px;
+    grid-auto-rows: minmax(100px, auto);
+    grid-column-gap: 50px;
+    grid-row-gap: 3em;
+    width: 100%;
+  }
+
+.img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 10;
+    height: 180px;
+}
+
+._img{
+    max-height: 180px;
+    max-width: 100%;
+}
+
+.post{
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.521), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    max-height: 300px;
+    position: relative;
+}
+
+.post > a{
+    width: 100%;
+    height: 100%;
+}
+
+.btn-supprimer:hover{
+    background-color: rgb(255, 40, 40);
+    color: white;
+}
+
+.Titre{
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-variant: small-caps;
+}
+
+.Titre, .Date{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.Auteur, .Date{
+    font-size: 0.9em;
+}
+
+.Auteur{
+    font-style: italic;
+}
+
+.line_post{
+    width: calc(100% + 20px);
+    transform: translateX(-10px);
+    margin-top: calc(1em - 2px);
+    background: rgba(36, 36, 36, 0.507);
+    height : 2px;
+}
+
+*[statut="False"]{
+    color: red;
+}
+
+.supprimer{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: auto;
+}
+
+/* Popup */
+
+.popup{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100vh - 2 * var(--header-height) - 100px);
+}
+
+.popup-body{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(233, 233, 255);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.post-body{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-body img{
+    max-width: 100%;
+    height: 45%;
+    align-self: center;
+}
+
+.nom{
+    margin-top: 10px;
+    margin-bottom: 0px;
+    font-variant: small-caps;
+}
+
+.auteur{
+    margin: 0;
+    font-style: italic;
+}
+
+*[avis="positif"]{
+    border: 1px solid rgb(0, 255, 0);
+    border-left: 3px solid rgb(0, 255, 0);
+}
+
+*[avis="neutre"]{
+    border: 1px solid orange;
+    border-left: 3px solid orange;
+}
+
+*[avis="negatif"]{
+    border: 1px solid red;
+    border-left: 3px solid red;
+}
+
+.commentaires .auteur{
+    margin-bottom: 10px;
+}
+
+.commentaire, .reponse{
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.commentaires{
+    position: relative;
+    width: 35%;
+    background-color: hsl(240, 30%, 80%);
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.actions{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.btn-repondre, .btn-reponses, .btn-repondre + input, .btn-reponses + input{
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.btn-repondre + input{
+    display: none;
+}
+
+.btn-reponses + input{
+    appearance: none;
+    margin-right: auto;
+}
+
+.btn-reponses + input::after{
+    content: "▼";
+    display: flex;
+    line-height: 100%;
+    transition: all 0.5s;
+}
+
+.btn-reponses + input:checked::after{
+    transform: rotateX(180deg);
+}
+
+.commenter *:disabled{
+    cursor: default;
+    background-color: rgba(239, 239, 239, 1) !important;
+    color: rgb(84, 84, 84) !important;
+    border-color: rgba(118, 118, 118, 1);
+}
+
+.commentaire{
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+.reponses{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 1s;
+    transition-property: clip;
+}
+
+
+.collapsible-wrapper > .collapsible {
+    margin-bottom: -2000px;
+    transition: margin-bottom 0.5s cubic-bezier(1, 0, 1, 1), visibility 0s 0.3s, max-height 0s 0.3s;
+    max-height: 0;
+}
+
+.collapsible-wrapper:after {
+    height: 0;
+    transition: height 0.5s linear;
+    max-height: 50px;
+}
+
+.btn-reponses + input:checked ~ .collapsible-wrapper {
+    display: flex;
+    overflow: hidden;
+}
+
+.btn-reponses + input:checked ~ .collapsible-wrapper:after {
+    content: '';
+    height: 50px;
+    transition: height 0.5s linear, max-height 0s 0.5s linear;
+    max-height: 0px;
+}
+
+.btn-reponses + input:checked ~ .collapsible-wrapper .collapsible {
+    transition: margin-bottom 0.5s cubic-bezier(0, 0, 0, 1);
+    margin-bottom: 0;
+    max-height: 1000000px;
+}
+
+
+
+
+
+.reponse{
+    margin-left: 20px;
+    background-color: rgba(168, 255, 251, 0.2);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+}
+
+.reponse .auteur{
+    width: 100%;
+}
+
+.reponse .btn-supprimer{
+    margin-left: auto;
+}
+
+.actions .commenter{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.commentaires > .commenter{
+    justify-self: flex-end;
+    margin: -10px 0;
+    padding: 10px 0;
+    background-color: hsl(240, 30%, 80%);
+    bottom: 0;
+    display: flex;
+    margin-top: auto;
+    position: sticky;
+}
+
+.btn-repondre + input ~ .commenter{
+    display: none;
+}
+
+.btn-repondre + input:checked ~ .commenter{
+    display: flex;
+}
+
+.commenter textarea{
+    flex: 1;
+    resize: none;
+    padding: 5px;
+    border-radius: 0;
+    border-right: none;
+}
+
+.commenter button{
+    margin: 0;
+}
+
+.contenu{
+    flex-basis: 50%;
+    white-space: pre-line;
+    overflow-y: auto;
+    border: solid 1px #C0C0C0;
+    background-color: #C0C0C020;
+    padding: 5px;
+}
+
+.avis{
+    display: flex;
+    flex-direction: column;
+    width: 5rem;
+}
+
+.avis_commentaires{
+    display: flex;
+    min-height: 5px;
+    position: sticky;
+    left: 0;
+    right: 0;
+    bottom: -10px;
+    margin-bottom: -10px;
+    padding-bottom: 10px;
+    background-color: hsl(240, 30%, 80%);
+}
+
+.avis > *{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px black;
+    font-size: 2em;
+}
+
+.avis a:hover{
+    box-shadow: inset 0px 0px 5px 7px rgba(255,255,255,0.5);
+}
+
+.avis[nombre="0"] > *, .avis_commentaires[nombre="0"] > *{
+    flex-grow: 1 !important;
+}
+
+.pour{
+    background-color: rgb(0, 255, 0);
+}
+
+.indifferent{
+    background-color: orange;
+}
+
+.contre{
+    background-color: red;
+}
+
+/* Add post */
+
+a[href="/nouveau_post"]{
+    position: sticky;
+    bottom: 20px;
+    right: 20px; 
+    align-self: flex-end;
+    margin-right: -30px;
+    margin-bottom: -30px;
+}
+
+.AddPost{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(101, 168, 255);
+    width : 45px;
+    height: 45px;
+    border-radius: 50%;
+    font-size: 45px;
+}
+
+#make_post_form{ 
+    width: 80%;
+    flex-basis: 100%;
+    flex-grow: 1;
+    display: grid;
+    grid-template-areas: 
+        "creation creation creation"
+        "titre titre-input texte-input"
+        "auteur auteur-input texte-input"
+        "image image-input texte-input"
+        "date date-input texte-input"
+        "bouton bouton bouton";
+        
+    grid-template-columns: auto 2fr 4fr;
+    grid-template-rows: auto auto auto auto auto auto;
+    grid-gap: 10px;
+}
+
+#titre{ 
+    grid-area: titre;
+}
+
+#titre-input{ 
+    grid-area: titre-input;
+}
+
+#auteur{ 
+    grid-area: auteur;
+}
+
+#auteur-input{ 
+    grid-area: auteur-input;
+}
+
+#image{  
+    grid-area: image;
+}
+
+#image-input{ 
+    grid-area: image-input;
+}
+
+#date{ 
+    grid-area: date;
+}
+
+#date-input{ 
+    grid-area: date-input;
+}
+
+#texte{ 
+    grid-area: texte;
+}
+
+#texte-input{  
+    grid-area: texte-input;
+    padding: 10px;
+}
+
+#bouton{ 
+    grid-area: bouton;
+}
+
+#make_post_form label{ 
+    font-size: x-large;
+    display: flex;
+    align-items: center;
+}
+
+#make_post_form input{ 
+    min-height: 30px;
+    max-height: 30px;
+    align-self: center;
+}
+
+#make_post_form textarea{
+    resize: none;
+}
+
+.Form_title{
+    grid-area: creation;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+button, input[type="file"]{ 
+    cursor: pointer;
+}
+
+/* Profil */
+
+.profil{
+    min-height: calc(100vh - 2 * var(--header-height) - 100px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profil > a{
+    font-size: 2.5rem;
+    margin-top: -10px;
+}
+
+.coordonnees{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.coordonnees > a{ 
+    margin-bottom: 20px;
+}
+
+.coordonnees > .telephone::before, .coordonnees > .email::before, .coordonnees > .site::before{ 
+    margin-right: 4px;
+}
+
+.coordonnees input{ 
+    min-width: 200px;
+    height: 30px;
+}
+
+.coordonnees button{ 
+    width: 100%;
+    height: 36px;
+    margin: 0;
+}
+
+.stats{
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.stat{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: white;
+    border: solid 1px black;
+    height: 9rem;
+    width: 9rem;
+}
+
+.stat *{
+    margin: 0;
+}
+
+.stat h2{
+    font-size: 4rem;
+}
+
+.stat p{
+    font-size: 1.2rem;
+}
+
+.telephone::before{
+    content: "📞";
+}
+
+.email::before{
+    content: "📧"
+}
+
+.site::before{
+    content: "🌐"
+}

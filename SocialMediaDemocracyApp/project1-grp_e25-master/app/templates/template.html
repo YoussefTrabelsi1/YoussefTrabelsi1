@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <title>𝘊𝘪𝘷𝘪𝘤'𝘛𝘕</title>
+</head>
+
+<body>
+    <header>
+        <a class="civic-tn" href="{{url_for('Main')}}">𝘾𝙞𝙫𝙞𝙘'𝙏𝙉</a>
+        <a class="local-admin" href="{{url_for('profil', id=2)}}">𝓥𝓲𝓵𝓵𝓮 𝓭𝓮 𝓝𝓪𝓷𝓬𝔂</a>
+        <div class="connexion">
+            {% if session['username'] %}
+            <a href="{{url_for('profil', id=session['id'])}}">
+                {{ session['username'] }}
+            </a>
+            <a type="button" href="{{url_for('log_out', origine=request.path.replace('/', '\/'))}}">Se déconnecter</a>
+            {% else %}
+            <a type="button" href="{{url_for('log_in', id=1, origine=request.path.replace('/', '\/'))}}">Se connecter</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <main>
+        {% include page %}
+    </main>
+
+    <footer>
+        © 2021 - François DENES - Julien RIDEL - Youssef TRABELSI
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<div class="popup">
+    <div class="popup-body">
+        <div class="post-body">
+            <img src="{{url_for('get_image_post', filename=post['id'])}}" alt="Photo post" />
+            <h1 class="nom">{{post['titre']}}</h1>
+            <p class="auteur">Idée de {{post['auteur']}}</p>
+            <p class="contenu">{{post['texte']}}</p>
+        </div>
+        <div class="commentaires" action="/commenter_post" method="post">
+            {% for commentaire in post['commentaires'] %}
+            <div class="commentaire" avis="{{commentaire['avis']}}">
+                <div class="auteur">Commentaire de {{commentaire['auteur']}} du {{commentaire['date']|format_datetime}}</div>
+                {% if commentaire['supprime'] %}
+                Supprimé
+                {% else %}
+                {{commentaire['texte']}}
+                <div class="actions">
+                    <label class="btn-reponses" for="reponses_{{commentaire['id']}}">{{commentaire['reponses']|length}}
+                        Réponse(s)</label>
+                    <input id="reponses_{{commentaire['id']}}" type="checkbox" />
+                    {% if (session['id']==commentaire['utilisateur_id'] or session['admin']) %}
+                    <a class="btn btn-supprimer"
+                        href="{{url_for('supprimer_commentaire', post=post['id'], id=commentaire['utilisateur_id'], commentaire=commentaire['id'])}}">Supprimer</a>
+                    {% endif %}
+                    <label class="btn-repondre btn" for="repondre_{{commentaire['id']}}">Répondre</label>
+                    <input id="repondre_{{commentaire['id']}}" type="checkbox" name="repondre"
+                        value="{{commentaire['id']}}" />
+                    <div class="reponses collapsible-wrapper">
+                        <div class="collapsible">
+                            {% for reponse in commentaire['reponses'] %}
+                            <div class="reponse" avis="{{reponse['avis']}}">
+                                <div class="auteur">Réponse de {{reponse['auteur']}} du {{reponse['date']|format_datetime}}</div>
+                                {% if reponse['supprime'] %}
+                                Supprimée
+                                {% else %}
+                                {{reponse['texte']}}
+                                {% if (session['id']==reponse['utilisateur_id'] or session['admin']) %}
+                                <a class="btn btn-supprimer"
+                                    href="{{url_for('supprimer_commentaire', post=post['id'], id=commentaire['utilisateur_id'], commentaire=reponse['id'])}}">Supprimer</a>
+                                {% endif %}
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% if session %}
+                    <form class="commenter" action="/repondre_commentaire" method="post">
+                        <textarea name="commentaire"
+                            placeholder="Répondre au commentaire de {{commentaire['auteur']}}"></textarea>
+                        <input name="post" value="{{post['id']}}" style="display:none"></input>
+                        <button type="submit" name="id" value="{{commentaire['id']}}">➤</button>
+                    </form>
+                    {% else %}
+                    <form class="commenter">
+                        <textarea name="commentaire"
+                            placeholder="Connectez-vous pour répondre au commentaire de {{post['auteur']}}"
+                            disabled></textarea>
+                        <button type="submit" name="id" value="{{commentaire['id']}}" disabled>➤</button>
+                    </form>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            {% if session %}
+            <form class="commenter" action="/commenter_post" method="post">
+                <textarea name="commentaire" placeholder="Commenter le post de {{post['auteur']}}"></textarea>
+                <button type="submit" name="post" value="{{post['id']}}">➤</button>
+            </form>
+            {% else %}
+            <form class="commenter">
+                <textarea name="commentaire" placeholder="Connectez-vous pour commenter le post de {{post['auteur']}}"
+                    disabled></textarea>
+                <button type="submit" name="post" value="{{post['id']}}" disabled>➤</button>
+            </form>
+            {% endif %}
+            <div class="avis_commentaires" nombre="{{post['avis_commentaires']['positif']+post['avis_commentaires']['neutre']+post['avis_commentaires']['negatif']}}">
+                <div class="pour" style="flex-grow: {{post['avis_commentaires']['positif']}}"></div>
+                <div class="indifferent" style="flex-grow: {{post['avis_commentaires']['neutre']}}"></div>
+                <div class="contre" style="flex-grow: {{post['avis_commentaires']['negatif']}}"></div>
+            </div>
+        </div>
+        {% if session %}
+        <div class="avis" nombre="{{post['nb_avis']}}">
+            <a class="pour" style="flex-grow: {{post['avis']['pour']}}; border: solid {{post['Pour']}}px black" href="{{url_for('avis', post=post['id'], avis='Pour')}}">{{post['avis']['pour']}}</a>
+            <a class="indifferent" style="flex-grow: {{post['avis']['indifferent']}}; border: solid {{post['Indifférent']}}px black" href="{{url_for('avis', post=post['id'], avis='Indifférent')}}">{{post['avis']['indifferent']}}</a>
+            <a class="contre" style="flex-grow: {{post['avis']['contre']}}; border: solid {{post['Contre']}}px black" href="{{url_for('avis', post=post['id'], avis='Contre')}}">{{post['avis']['contre']}}</a>
+        </div>
+        {% else %}
+        <div class="avis" nombre="{{post['nb_avis']}}">
+            <div class="pour" style="flex-grow: {{post['avis']['pour']}}">{{post['avis']['pour']}}</div>
+            <div class="indifferent" style="flex-grow: {{post['avis']['indifferent']}}">{{post['avis']['indifferent']}}</div>
+            <div class="contre" style="flex-grow: {{post['avis']['contre']}}">{{post['avis']['contre']}}</div>
+        </div>
+        {% endif %}
+    </div>
+</div>

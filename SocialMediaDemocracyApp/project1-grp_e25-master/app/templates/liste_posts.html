@@ -1,0 +1,51 @@
+<!--Bandeau secondaire de la page contenant les options de recherches-->
+<form class="Tri">
+    <a href="{{ url_for('filtrer', filtre='recents')}}">
+        <input type="radio" value="recents" {{ tri['recents'] }} />
+        <label>Récents</label>
+    </a>
+    <a href="{{ url_for('filtrer', filtre='urgents')}}">
+        <input type="radio" value="urgents" {{ tri['urgents'] }} />
+        <label>Urgents</label>
+    </a>
+    <a href="{{ url_for('filtrer', filtre='populaires')}}">
+        <input type="radio" value="populaires" {{ tri['populaires'] }} />
+        <label>Populaires</label>
+    </a>
+    <a href="{{ url_for('filtrer', filtre='termines')}}">
+        <input type="checkbox" name="termines" {{ tri['termines'] }} />
+        <label>Terminés</label>
+    </a>
+    {% if session['id'] %}
+    <a href="{{ url_for('filtrer', filtre='avis')}}">
+        <input type="checkbox" name="reactions" {{ tri['avis'] }} />
+        <label>Mes avis</label>
+    </a>
+    {% endif %}
+</form>
+<!--Grid et posts-->
+
+<div class="wrapper">
+    {%for post in posts%}
+    <div class="post">
+        <a href="{{url_for('voir_post', id=post['id'])}}">
+            <p class="Titre"> {{post['titre']}}</p>
+            <div class="img">
+                <img src="{{url_for('get_image_post', filename=post['id'])}}" class="_img" />
+            </div>
+            <div class="line_post"> </div>
+            <p class="Auteur"> De : {{post['auteur']}} </p>
+            <p class="Date" statut="{{post['statut']}}"> Expire le : {{post['date_fin']|format_datetime}}</p>
+        </a>
+        {% if session['id']==post['utilisateur_id'] or session['admin']==True %}
+        <form action="{{url_for('supprimer', id=post['id'], auteur=post['utilisateur_id'])}}"><button type="submit" class="supprimer btn-supprimer">Supprimer</button></form>
+        {% endif %}
+
+    </div>
+    {%endfor%}
+</div>
+{% if session['id'] %}
+<a href="{{url_for('nouveau_post')}}">
+    <div class="AddPost" title="Ajouter un post">+</div>
+</a>
+{% endif %}

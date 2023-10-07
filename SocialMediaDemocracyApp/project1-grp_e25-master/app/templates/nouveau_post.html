@@ -1,0 +1,16 @@
+    <!--FORM-->
+    <form id="make_post_form" action="/nouveau_post" method="post" role="form" enctype="multipart/form-data">
+        <div class='Form_title'>Création de votre proposition</div>
+        <!--système d'acquisition des données-->
+        <label id="titre">Titre</label>
+        <input type="text" id="titre-input" name="Titre" placeholder="Titre de votre proposition">
+        <label id="auteur">Auteur</label>
+        <input type="text" id="auteur-input" name="Name" disabled="true" value="{{session['username']}}"
+            placeholder="Nom et Prénom">
+        <label id="image">Image</label>
+        <input type="file" id="image-input" name="Img" accept="image/*">
+        <label id="date">Date de fin</label>
+        <input type="date" id="date-input" name="date_fin">
+        <textarea id="texte-input" name="Texte" placeholder="Description de votre proposition"></textarea>
+        <button id="bouton" type="submit" class="btn">Soumettre</button>
+    </form>
